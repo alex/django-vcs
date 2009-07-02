@@ -1,0 +1,6 @@
+django-vcs
+==========
+
+Requirements::
+
+    * pyvcs
