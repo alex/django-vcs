@@ -3,6 +3,8 @@ from itertools import count
 from django.db import models
 
 from pyvcs.backends import AVAILABLE_BACKENDS, get_backend
+from pyvcs.exceptions import FileDoesNotExist, FolderDoesNotExist
+
 
 REPOSITORY_TYPES = zip(count(), AVAILABLE_BACKENDS.keys())
 
@@ -17,6 +19,10 @@ class CodeRepository(models.Model):
     def __unicode__(self):
         return "%s: %s" % (self.get_repository_type_display(), self.name)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('recent_commits', (), {'slug': self.slug})
+
     @property
     def repo(self):
         if hasattr(self, '_repo'):
@@ -26,3 +32,15 @@ class CodeRepository(models.Model):
 
     def get_recent_commits(self, since=None):
         return self.repo.get_recent_commits(since=since)
+
+    def get_folder_contents(self, path):
+        try:
+            return self.repo.list_directory(path)
+        except FolderDoesNotExist:
+            return None
+
+    def get_file_contents(self, path):
+        try:
+            return self.repo.file_conents(path)
+        except FileDoesNotExist:
+            return None
