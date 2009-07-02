@@ -1,0 +1,19 @@
+{% extends "django_vcs/base.html" %}
+
+{% load udiff %}
+
+{% block title %}
+    Details about commit {{ commit.commit_id }} on {{ repo.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        Details about commit {{ commit.commit_id }} on {{ repo.name }}
+    </h1>
+    <ul>
+        <li>Committed by: {{ commit.author }}</li>
+        <li>Committed at: {{ commit.time }}</li>
+    </ul>
+
+    {{ commit.diff|render_diff }}
+{% endblock %}

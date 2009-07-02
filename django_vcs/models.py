@@ -32,7 +32,7 @@ class CodeRepository(models.Model):
 
     def get_commit(self, commit_id):
         try:
-            return self.repo.get_commit_by_id(commit_id)
+            return self.repo.get_commit_by_id(str(commit_id))
         except CommitDoesNotExist:
             return None
 

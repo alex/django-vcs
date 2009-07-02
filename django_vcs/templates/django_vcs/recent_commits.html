@@ -8,11 +8,24 @@
     <h1>
         Recent commits for {{ repo.name }}
     </h1>
-    <ul>
+    <table>
         {% for commit in commits %}
-            <li>
-                {{ commit.commit_id }}: {{ commit.author }} commited {{ commit.message }} at {{ commit.time }}
-            </li>
+            <tr>
+                <td>
+                    <a href="{% url commit_detail slug=repo.slug commit_id=commit.commit_id %}">
+                        {{ commit.commit_id }}
+                    </a>
+                </td>
+                <td>
+                    {{ commit.author }}
+                </td>
+                <td>
+                    {{ commit.message }}
+                </td>
+                <td>
+                    {{ commit.item }}
+                </td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
 {% endblock %}
