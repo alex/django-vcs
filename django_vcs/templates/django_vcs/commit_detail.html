@@ -17,6 +17,7 @@
     <ul>
         <li>Committed by: {{ commit.author }}</li>
         <li>Committed at: {{ commit.time }}</li>
+        <li>Commit message: {{ commit.message }}</li>
     </ul>
 
     {{ commit.diff|render_diff }}
