@@ -6,6 +6,10 @@
     Details about commit {{ commit.commit_id }} on {{ repo.name }}
 {% endblock %}
 
+{% block extra_head %}
+    {% diff_css %}
+{% endblock %}
+
 {% block content %}
     <h1>
         Details about commit {{ commit.commit_id }} on {{ repo.name }}
