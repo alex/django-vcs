@@ -1,0 +1,18 @@
+{% extends "django_vcs/base.html" %}
+
+{% block title %}
+    Recent commits for {{ repo.name }}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        Recent commits for {{ repo.name }}
+    </h1>
+    <ul>
+        {% for commit in commits %}
+            <li>
+                {{ commit.commit_id }}: {{ commit.author }} commited {{ commit.message }} at {{ commit.time }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
