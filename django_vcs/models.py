@@ -47,6 +47,6 @@ class CodeRepository(models.Model):
 
     def get_file_contents(self, path):
         try:
-            return self.repo.file_conents(path)
+            return self.repo.file_contents(path)
         except FileDoesNotExist:
             return None
