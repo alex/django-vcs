@@ -27,7 +27,7 @@ class CodeRepository(models.Model):
     def repo(self):
         if hasattr(self, '_repo'):
             return self._repo
-        self._repo = get_backend(self.get_repository_type_display())(self.location)
+        self._repo = get_backend(self.get_repository_type_display()).Repository(self.location)
         return self._repo
 
     def get_commit(self, commit_id):
