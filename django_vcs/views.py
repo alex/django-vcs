@@ -14,7 +14,7 @@ def recent_commits(request, slug):
 
 def code_browser(request, slug, path):
     repo = get_object_or_404(CodeRepository, slug=slug)
-    context = {'repo': repo}
+    context = {'repo': repo, 'path': path}
     file_contents = repo.get_file_contents(path)
     if file is None:
         folder_contents = repo.get_folder_contents(path)
