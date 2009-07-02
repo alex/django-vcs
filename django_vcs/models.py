@@ -3,7 +3,7 @@ from itertools import count
 from django.db import models
 
 from pyvcs.backends import AVAILABLE_BACKENDS, get_backend
-from pyvcs.exceptions import FileDoesNotExist, FolderDoesNotExist
+from pyvcs.exceptions import CommitDoesNotExist, FileDoesNotExist, FolderDoesNotExist
 
 
 REPOSITORY_TYPES = zip(count(), AVAILABLE_BACKENDS.keys())
@@ -29,6 +29,12 @@ class CodeRepository(models.Model):
             return self._repo
         self._repo = get_backend(self.get_repository_type_display())(self.location)
         return self._repo
+
+    def get_commit(self, commit_id):
+        try:
+            return self.repo.get_commit_by_id(commit_id)
+        except CommitDoesNotExist:
+            return None
 
     def get_recent_commits(self, since=None):
         return self.repo.get_recent_commits(since=since)

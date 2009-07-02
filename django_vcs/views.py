@@ -32,4 +32,11 @@ def code_browser(request, slug, path):
     ], context, context_instance=RequestContext(request))
 
 def commit_detail(request, slug, commit_id):
-    pass
+    repo = get_object_or_404(CodeRepository, slug=slug)
+    commit = repo.get_commit(commit_id)
+    if commit is None:
+        raise Http404
+    return render_to_response([
+        'django_vcs/%s/commit_detail.html' % repo.name,
+        'django_vcs/commit_detail.html',
+    ], {'repo': repo, 'commit': commit}, context_instance=RequestContext(request))
