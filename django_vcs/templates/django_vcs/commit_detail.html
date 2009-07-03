@@ -18,6 +18,17 @@
         <li>Committed by: {{ commit.author }}</li>
         <li>Committed at: {{ commit.time }}</li>
         <li>Commit message: {{ commit.message }}</li>
+        <li>Affected files:
+            <ul>
+                {% for file in commit.files %}
+                    <li>
+                        <a href="{% url code_browser slug=repo.slug path=file %}">
+                            {{ file }}
+                        <a/>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
     </ul>
 
     {{ commit.diff|render_diff }}
