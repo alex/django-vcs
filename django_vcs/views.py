@@ -1,3 +1,5 @@
+import os
+
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
@@ -16,11 +18,13 @@ def code_browser(request, slug, path):
     repo = get_object_or_404(CodeRepository, slug=slug)
     context = {'repo': repo, 'path': path}
     file_contents = repo.get_file_contents(path)
-    if file is None:
+    if file_contents is None:
         folder_contents = repo.get_folder_contents(path)
         if folder_contents is None:
             raise Http404
         context['files'], context['folders'] = folder_contents
+        context['files'] = [(os.path.join(path, o), o) for o in context['files']]
+        context['folders'] = [(os.path.join(path, o), o) for o in context['folders']]
         return render_to_response([
             'django_vcs/%s/folder_contents.html' % repo.name,
             'django_vcs/folder_contents.html',
