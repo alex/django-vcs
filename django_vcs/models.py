@@ -39,14 +39,14 @@ class CodeRepository(models.Model):
     def get_recent_commits(self, since=None):
         return self.repo.get_recent_commits(since=since)
 
-    def get_folder_contents(self, path):
+    def get_folder_contents(self, path, rev=None):
         try:
-            return self.repo.list_directory(path)
+            return self.repo.list_directory(path, str(rev))
         except FolderDoesNotExist:
             return None
 
-    def get_file_contents(self, path):
+    def get_file_contents(self, path, rev):
         try:
-            return self.repo.file_contents(path)
+            return self.repo.file_contents(path, str(rev))
         except FileDoesNotExist:
             return None
