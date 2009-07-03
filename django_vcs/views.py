@@ -6,6 +6,10 @@ from django.template import RequestContext
 
 from django_vcs.models import CodeRepository
 
+def repo_list(request):
+    repos = CodeRepository.objects.all()
+    return render_to_response('django_vcs/repo_list.html', {'repos': repos}, context_instance=RequestContext(request))
+
 def recent_commits(request, slug):
     repo = get_object_or_404(CodeRepository, slug=slug)
     commits = repo.get_recent_commits()
