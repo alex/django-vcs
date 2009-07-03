@@ -2,11 +2,11 @@ from itertools import count
 
 from django.db import models
 
-from pyvcs.backends import BACKENDS, get_backend
+from pyvcs.backends import AVAILABLE_BACKENDS, get_backend
 from pyvcs.exceptions import CommitDoesNotExist, FileDoesNotExist, FolderDoesNotExist
 
 
-REPOSITORY_TYPES = zip(count(), BACKENDS.keys())
+REPOSITORY_TYPES = zip(count(), AVAILABLE_BACKENDS.keys())
 
 class CodeRepository(models.Model):
     name = models.CharField(max_length=255)
