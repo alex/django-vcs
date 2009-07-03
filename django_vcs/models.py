@@ -41,12 +41,16 @@ class CodeRepository(models.Model):
 
     def get_folder_contents(self, path, rev=None):
         try:
-            return self.repo.list_directory(path, str(rev))
+            if rev is not None:
+                rev = str(rev)
+            return self.repo.list_directory(path, rev)
         except FolderDoesNotExist:
             return None
 
-    def get_file_contents(self, path, rev):
+    def get_file_contents(self, path, rev=None):
         try:
-            return self.repo.file_contents(path, str(rev))
+            if rev is not None:
+                rev = str(rev)
+            return self.repo.file_contents(path, rev)
         except FileDoesNotExist:
             return None
