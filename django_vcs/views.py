@@ -6,6 +6,10 @@ from django.template import RequestContext
 
 from django_vcs.models import CodeRepository
 
+def repo_list(request):
+    repos = CodeRepository.objects.all()
+    return render_to_response('django_vcs/repo_list.html', {'repos': repos}, context_instance=RequestContext(request))
+
 def recent_commits(request, slug):
     repo = get_object_or_404(CodeRepository, slug=slug)
     commits = repo.get_recent_commits()
@@ -16,10 +20,11 @@ def recent_commits(request, slug):
 
 def code_browser(request, slug, path):
     repo = get_object_or_404(CodeRepository, slug=slug)
+    rev = request.GET.get('rev') or None
     context = {'repo': repo, 'path': path}
-    file_contents = repo.get_file_contents(path)
+    file_contents = repo.get_file_contents(path, rev)
     if file_contents is None:
-        folder_contents = repo.get_folder_contents(path)
+        folder_contents = repo.get_folder_contents(path, rev)
         if folder_contents is None:
             raise Http404
         context['files'], context['folders'] = folder_contents
