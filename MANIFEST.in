@@ -1,2 +1,3 @@
-LICENSE.txt
-README.txt
+include LICENSE.txt
+include README.txt
+recursive-include django_vcs/templates/django_vcs *
