@@ -3,8 +3,9 @@ from setuptools import setup, find_packages
 setup(
     name = 'django-vcs',
     version = '0.1',
+    description = "A Django application to interface with a VCS using the pyvcs library.",
+    url = 'http://github.com/alex/django-vcs/',
     packages = find_packages('django_vcs'),
-    package_dir = {'': 'django_vcs'},
     package_data = {
         'django_vcs': 'templates/django_vcs/*.html',
     }
