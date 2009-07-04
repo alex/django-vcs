@@ -2,10 +2,9 @@ from django import template
 from django.utils.safestring import mark_safe
 
 from pygments import highlight
-from pygments.lexers import guess_lexer_for_filename
-from pygments.lexers.special import TextLexer
-from pygments.util import ClassNotFound 
 from pygments.formatters import HtmlFormatter
+from pygments.lexers import guess_lexer_for_filename, TextLexer
+from pygments.util import ClassNotFound
 
 register = template.Library()
 
@@ -15,7 +14,7 @@ def highlight_filter(text, filename):
         lexer = guess_lexer_for_filename(filename, text)
     except ClassNotFound:
         lexer = TextLexer()
-    
+
     return mark_safe(highlight(
         text,
         lexer,
