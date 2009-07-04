@@ -6,9 +6,9 @@ setup(
     packages = find_packages('django_vcs'),
     package_dir = {'': 'django_vcs'},
     install_requires = ['setuptools'],
-    package_data = [
-        'templates/django_vcs/*.html',
-    ]
+    package_data = {
+        'django_vcs': 'templates/django_vcs/*.html',
+    }
     classifiers = [
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
