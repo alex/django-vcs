@@ -5,7 +5,6 @@ setup(
     version = '0.1',
     packages = find_packages('django_vcs'),
     package_dir = {'': 'django_vcs'},
-    install_requires = ['setuptools'],
     package_data = {
         'django_vcs': 'templates/django_vcs/*.html',
     }
