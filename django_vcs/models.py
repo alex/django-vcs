@@ -16,6 +16,9 @@ class CodeRepository(models.Model):
 
     location = models.CharField(max_length=255)
 
+    class Meta:
+        verbose_name_plural = "Code Repositories"
+
     def __unicode__(self):
         return "%s: %s" % (self.get_repository_type_display(), self.name)
 
