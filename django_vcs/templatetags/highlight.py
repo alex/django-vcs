@@ -18,10 +18,10 @@ def highlight_filter(text, filename):
     return mark_safe(highlight(
         text,
         lexer,
-        HtmlFormatter()
+        HtmlFormatter(linenos="table", lineanchors="line")
     ))
 
 
 @register.simple_tag
 def highlight_css():
-    return HtmlFormatter().get_style_defs()
+    return HtmlFormatter(linenos="table", lineanchors="line").get_style_defs()
